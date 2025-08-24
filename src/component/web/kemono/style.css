@@ -1,0 +1,38 @@
+.checkboxImg {
+  cursor: pointer;
+}
+
+.checkboxContainer {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 999;
+}
+
+.checkboxContainer-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 999;
+}
+
+#showBlacklistTargetCheckboxImg {
+  cursor: pointer;
+}
+
+#showBlaclistTargetCheckboxText {
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.flexbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexboxItem {
+  margin: 10px 10px 10px 10px;
+}

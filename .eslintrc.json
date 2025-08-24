@@ -20,11 +20,25 @@
     "no-use-before-define": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/explicit-function-return-type": "warn",
     "semi": "off",
     "@typescript-eslint/semi": [
       "warn",
       "always"
-    ]
+    ],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "@typescript-eslint/type-annotation-spacing": [
+      "error",
+      { "before": false, "after": true }
+    ],
+    "arrow-spacing": ["error", { "before": true, "after": true }]
   },
   "globals": {
     "chrome": "readonly"

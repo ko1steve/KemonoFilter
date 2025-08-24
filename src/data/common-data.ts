@@ -3,10 +3,6 @@ export interface IHTMLElement {
   className?: string
 }
 
-export interface IImageElement extends IHTMLElement {
-  sourceName: string
-}
-
 export interface ITextElement extends IHTMLElement {
   innerText: string
 }
@@ -27,14 +23,9 @@ export interface ICheckboxImageElement extends IButtonElement {
   text?: ITextElement
 }
 
-export interface IUserInfoOption {
-  hideUser?: {
+export interface ITargetInfoOption {
+  hideTarget?: {
     infoElement: HTMLElement
     parentList: HTMLElement
   }
-}
-
-export interface IAssetData {
-  from: string
-  to: string
 }
