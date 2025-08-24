@@ -2,21 +2,24 @@ import * as Path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import TerserWebpackPlugin from 'terser-webpack-plugin';
-import { ProvidePlugin } from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import { AssetList } from '../src/assetList';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import { ProvidePlugin } from 'webpack';
+import { AssetList } from './../src/asset-list';
 
 const appDir = Path.dirname(__dirname);
 
 module.exports = {
   mode: 'none',
   entry: {
-    'src/component/search/content': './src/component/search/content.ts',
-    'src/component/artist/content': './src/component/artist/content.ts'
+    'src/component/popup/popup': './src/component/popup/popup.ts',
+    'src/component/background/background': './src/component/background/background.ts',
+    'src/component/web/kemono/content': './src/component/web/kemono/content.ts'
   },
   output: {
     path: Path.join(appDir, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    clean: true
   },
   module: {
     rules: [
@@ -26,7 +29,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
@@ -54,6 +57,10 @@ module.exports = {
           esModule: false
         },
         type: 'javascript/auto'
+      },
+      {
+        test: /\.html$/,
+        use: ['html-loader']
       }
     ]
   },
@@ -65,6 +72,9 @@ module.exports = {
     ],
     alias: {
       src: Path.resolve(appDir, 'src/')
+    },
+    fallback: {
+      chrome: false
     }
   },
   target: 'web',
@@ -76,14 +86,44 @@ module.exports = {
       extensions: ['ts', 'tsx']
     }),
     new MiniCssExtractPlugin({
-      filename: ({ chunk }) => chunk!.name!.replace('content', 'style').concat('.css')
+      filename: ({ chunk }): string => {
+        console.log('[webpack-debug] css.chunk.name=' + chunk!.name);
+        const regexp = /content$/;
+        const replace = 'style.css';
+        if (chunk!.name!.match(regexp)) {
+          return chunk!.name!.replace(regexp, replace);
+        }
+        return '[name].css';
+      }
     }),
     new CopyWebpackPlugin({
       patterns: AssetList
+    }),
+    new HTMLWebpackPlugin({
+      template: './src/component/popup/popup.html',
+      filename: './src/component/popup/popup.html',
+      chunks: ['src/component/popup/popup'],
+      inject: 'head'
     })
   ],
   optimization: {
     minimize: true,
-    minimizer: [new TerserWebpackPlugin()]
+    minimizer: [new TerserWebpackPlugin({
+      terserOptions: {
+        keep_fnames: true,
+        format: {
+          comments: false
+        },
+        compress: {
+          keep_fargs: true,
+          keep_classnames: true,
+          keep_fnames: true
+        },
+        mangle: {
+          reserved: ['chrome', 'document', 'window']
+        }
+      },
+      extractComments: false
+    })]
   }
 };

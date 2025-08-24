@@ -1,34 +1,30 @@
 {
   "name": "KemonoFilter",
-  "action": {},
   "manifest_version": 3,
   "version": "1.0.0",
   "description": "",
+  "action": {
+    "default_popup": "src/component/popup/popup.html",
+    "default_icon": "image/icon.png"
+  },
+  "background": {
+    "service_worker": "src/component/background/background.js"
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
   "content_scripts": [
     {
       "css": [
-        "src/component/search/style.css"
+        "src/component/web/kemono/style.css"
       ],
       "js": [
-        "src/component/search/content.js"
+        "src/component/web/kemono/content.js"
       ],
       "matches": [
-        "https://kemono.cr/posts*",
-        "https://kemono.su/posts*",
-        "https://kemono.cr/*/user/*",
-        "https://kemono.su/*/user/*"
-      ]
-    },
-    {
-      "css": [
-        "src/component/artist/style.css"
-      ],
-      "js": [
-        "src/component/artist/content.js"
-      ],
-      "matches": [
-        "https://kemono.cr/*/user/*/recommended",
-        "https://kemono.su/*/user/*/recommended"
+        "https://kemono.cr/*",
+        "https://kemono.su/*"
       ]
     }
   ],
