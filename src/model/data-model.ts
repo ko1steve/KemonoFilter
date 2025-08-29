@@ -94,7 +94,8 @@ export class DataModel {
     });
   }
 
-  public addTargetStringToBlacklist(targetString: string): Promise<void> {
+  public async addTargetStringToBlacklist(targetString: string): Promise<void> {
+    await this.initBlacklist();
     return new Promise<void>(resolve => {
       const lowerCaseTitle = targetString.toLowerCase();
       const key = lowerCaseTitle[0];
@@ -117,7 +118,8 @@ export class DataModel {
     });
   }
 
-  public removeTargetStringFromBlacklist(targetString: string): Promise<void> {
+  public async removeTargetStringFromBlacklist(targetString: string): Promise<void> {
+    await this.initBlacklist();
     return new Promise<void>(resolve => {
       const lowerCaseTitle = targetString.toLowerCase();
       const key = lowerCaseTitle[0];
