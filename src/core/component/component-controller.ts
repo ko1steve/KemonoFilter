@@ -29,10 +29,9 @@ export class ComponentController {
       return;
     }
     this._running = running;
-    if (running) {
-      this.initailzie();
-    }
-    CommonUtil.showLog('extension controller ' + this.componentConfig.componentId + ' is ' + (running ? 'running' : 'stopped'));
+    this.dataModel.initialize().then(() => {
+      CommonUtil.showLog('extension controller ' + this.componentConfig.componentId + ' is ' + (running ? 'running' : 'stopped'));
+    });
   }
 
   constructor(componentConfig: ComponentConfig) {
