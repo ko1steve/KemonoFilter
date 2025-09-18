@@ -45,10 +45,9 @@ export class DataModel {
     this._numberOfTargets = 0;
     this._debug = false;
     this._initialized = false;
-    this.initialize();
   }
 
-  protected async initialize(): Promise<void> {
+  public async initialize(): Promise<void> {
     await this.initBlacklist();
     await this.initShowBlacklistTargets();
     await this.initDebugMode();

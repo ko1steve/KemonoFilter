@@ -1,5 +1,5 @@
 export class DataStorage {
-  public static readonly MAX_STORAGE_BYTE_PER_KEY: number = 7000;
+  public static readonly MAX_STORAGE_BYTE_PER_KEY: number = 4000;
 
   public static async setItem(key: string, value: StorageDataType, storageType: StorageType = StorageType.SYNC): Promise<void> {
     if (storageType === StorageType.ALL || storageType === StorageType.LOCAL) {
