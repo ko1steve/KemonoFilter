@@ -15,6 +15,9 @@ export class GgdealsWebObserverConfig extends WebObserverConfig {
       /^https:\/\/kemono\..+\/.+\/user\/.+\/recommended$/, ControllerType.ARTIST
     ],
     [
+      /^https:\/\/kemono\..+\/artists.*$/, ControllerType.ARTIST
+    ],
+    [
       /^https:\/\/kemono\..+\/posts.*$/, ControllerType.WORK
     ],
     [
